@@ -105,6 +105,18 @@ namespace SendGrid
             var dsContent = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(stringContent);
             return dsContent;
         }
+        
+        /// <summary>
+        /// Converts string formatted response body to a List Dictionary.
+        /// </summary>
+        /// <param name="content">https://docs.microsoft.com/dotnet/api/system.net.http.httpcontent.</param>
+        /// <returns>List of Dictionary objects representation of HttpContent.</returns>
+        public virtual async Task<List<Dictionary<string, dynamic>>> DeserializeResponseBodyListAsync(HttpContent content)
+        {
+            var stringContent = await content.ReadAsStringAsync().ConfigureAwait(false);
+            var dsContent = JsonConvert.DeserializeObject<List<Dictionary<string, dynamic>>>(stringContent);
+            return dsContent;
+        }
 
         /// <summary>
         /// Converts string formatted response headers to a Dictionary.
